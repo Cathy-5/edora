@@ -1,24 +1,86 @@
 // src/Result.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './Result.css';
 
 function Result({ searchQuery, searchType }) {
-  // For demo, mock some search results based on searchQuery & searchType
   const mockResults = [
-    `Result 1 for ${searchQuery} (${searchType})`,
-    `Result 2 for ${searchQuery} (${searchType})`,
-    `Result 3 for ${searchQuery} (${searchType})`,
+    { 
+      fileName: `Lecture_Notes_${searchQuery}.pdf`,
+      tag: 'Notes', className: 'notes',
+      filePreview: "This document contains lecture notes covering...",
+      channelName: "EduMaster Channel",
+      likes: 10, dislikes: 2,
+      comments: ["Great notes!", "Very helpful."]
+    },
+    { 
+      fileName: `Final_Exam_${searchQuery}.pdf`,
+      tag: 'Exam', className: 'test',
+      filePreview: "This exam tests knowledge of fundamental concepts...",
+      channelName: "ExamPrep Hub",
+      likes: 7, dislikes: 1,
+      comments: ["Challenging questions!", "Good for practice."]
+    },
+    { 
+      fileName: `Lecture_Slides_${searchQuery}.pdf`,
+      tag: 'Slides', className: 'slides',
+      filePreview: "These slides summarize key points from the lecture...",
+      channelName: "SlideMaster Academy",
+      likes: 15, dislikes: 4,
+      comments: ["Clear explanations!", "Perfect summary."]
+    },
   ];
+
+  const [hoveredComments, setHoveredComments] = useState(null);
 
   return (
     <section className="result-container">
       <h2>Search Results</h2>
       {searchQuery ? (
-        <ul className="result-list">
+        <div className="result-list">
           {mockResults.map((result, i) => (
-            <li key={i} className="result-item">{result}</li>
+            <div key={i} className="result-item">
+              
+              {/* First Line: File Name & Tag */}
+              <div className="result-title">
+                <span>{result.fileName}</span>
+                <span className={`result-tag ${result.className}`}>{result.tag}</span>
+              </div>
+              <div className="result-buttons">
+                <button className="like-btn">👍 {result.likes}</button>
+              </div>
+
+              {/* Second Line: File Preview */}
+              <div className="result-preview">
+                <span>{result.filePreview}</span>
+              </div>
+              <div className="result-buttons">
+                <button className="dislike-btn">👎 {result.dislikes}</button>
+              </div>
+
+              {/* Third Line: Channel Name & Comment Button */}
+              <div className="result-channel">
+                <span>{result.channelName}</span>
+              </div>
+              <div className="result-buttons">
+                <button 
+                  className="comment-btn"
+                  onMouseEnter={() => setHoveredComments(result.comments)}
+                  onMouseLeave={() => setHoveredComments(null)}
+                >
+                  💬 {result.comments.length}
+                </button>
+                {hoveredComments && (
+                  <div className="comment-preview">
+                    {hoveredComments.map((comment, index) => (
+                      <p key={index}>{comment}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No search query entered.</p>
       )}

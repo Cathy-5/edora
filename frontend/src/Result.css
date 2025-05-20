@@ -1,25 +1,94 @@
 /* src/Result.css */
-.result-container {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  border: 1px solid #e5e7eb; /* light gray */
-  height: 100%;
-  overflow-y: auto;
-}
-
-.result-list {
-  list-style: none;
-  padding-left: 0;
-}
-
 .result-item {
-  padding: 10px 0;
+  padding: 15px;
   border-bottom: 1px solid #ddd;
-  font-size: 1rem;
-  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 0.3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.result-item:last-child {
-  border-bottom: none;
+/* First Line: File Name (Bold & Larger) with Tag */
+.result-title {
+  font-size: 1.4rem;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between title and tag */
+}
+
+/* Style Tags like Labels */
+.result-tag {
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block; /* Make it look like a tag */
+}
+
+/* Yellow for Notes */
+.notes {
+  background-color: #ffd700;
+  color: black;
+}
+
+/* Green for Exam */
+.test {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Orange for Slides */
+.slides {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* Second Line: File Preview (Gray & Medium Size) */
+.result-preview {
+  font-size: 1.1rem;
+  color: gray;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Third Line: Channel Name (Dark Gray & Smaller) */
+.result-channel {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Buttons (Always Right-Aligned, Each on New Line) */
+.result-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.like-btn,
+.dislike-btn,
+.comment-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 5px;
+  white-space: nowrap;
+  text-align: right;
+  width: fit-content;
+}
+
+/* Comment preview */
+.comment-preview {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }

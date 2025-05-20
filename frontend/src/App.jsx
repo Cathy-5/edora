@@ -1,29 +1,29 @@
 import './App.css';
 import React, { useState } from 'react';
-import uploadImage from './assets/upload.jpg'; 
-import edoraImage from './assets/edora.png'; 
-import homeImage from './assets/dashboard.png'; 
-import channelImage from './assets/channel.png'; 
-import messageImage from './assets/message.png'; 
-import saveImage from './assets/save.png'; 
-import notificationImage from './assets/notification.png'; 
-import settingImage from './assets/setting.png'; 
-import supportImage from './assets/support.png'; 
-import coinsImage from './assets/coins.png'; 
-import createImage from './assets/create.png'; 
+import uploadImage from './assets/upload.jpg';
+import edoraImage from './assets/edora.png';
+import homeImage from './assets/dashboard.png';
+import channelImage from './assets/channel.png';
+import messageImage from './assets/message.png';
+import saveImage from './assets/save.png';
+import notificationImage from './assets/notification.png';
+import settingImage from './assets/setting.png';
+import supportImage from './assets/support.png';
+import coinsImage from './assets/coins.png';
+import createImage from './assets/create.png';
 import Upload from './Upload';
-import Create from './Create'; 
-import Result from './Result';  // import Result component
+import Create from './Create';
+import Result from './Result';
 
 function App() {
   const [activeScene, setActiveScene] = useState('home');
-  const [points, setPoints] = useState(240); 
+  const [points, setPoints] = useState(240);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('file');
 
   const handleSearch = () => {
     console.log(`Searching for "${searchQuery}" in ${searchType}s`);
-    // You can later filter files or channels depending on `searchType`
+    setActiveScene('result');
   };
 
   return (
@@ -125,55 +125,48 @@ function App() {
         </div>
       </aside>
 
-        <main className="main-content">
-          <header className="header flex items-center gap-2">
+      <main className="main-content">
+        <header className="header flex items-center gap-2">
+          <div className="flex border border-gray-200 rounded-lg overflow-hidden flex-1 bg-white">
+            <select
+              className="appearance-none px-3 py-2 text-sm border-r border-gray-200 focus:outline-none bg-white"
+              value={searchType}
+              onChange={(e) => setSearchType(e.target.value)}
+            >
+              <option value="file">File</option>
+              <option value="channel">Channel</option>
+            </select>
 
-            {/* Softer round corners and light gray border */}
-            <div className="flex border border-gray-200 rounded-lg overflow-hidden flex-1 bg-white">
+            <input
+              type="text"
+              className="flex-grow px-4 py-2 focus:outline-none"
+              placeholder={`Search by ${searchType}...`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
 
-              {/* Select dropdown */}
-              <select
-                className="appearance-none px-3 py-2 text-sm border-r border-gray-200 focus:outline-none bg-white"
-                value={searchType}
-                onChange={(e) => setSearchType(e.target.value)}
-              >
-                <option value="file">File</option>
-                <option value="channel">Channel</option>
-              </select>
-
-              {/* Search input */}
-              <input
-                type="text"
-                className="flex-grow px-4 py-2 focus:outline-none"
-                placeholder={`Search by ${searchType}...`}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-
-              {/* Search button integrated */}
-              <button
-                className="bg-purple-600 text-white px-4 py-2 hover:bg-purple-700 transition focus:outline-none"
-                onClick={() => handleSearch()}
-              >
-                Search
-              </button>
-
-            </div>
-
-          </header>
-
+            <button
+              className="bg-purple-600 text-white px-4 py-2 hover:bg-purple-700 transition focus:outline-none"
+              onClick={handleSearch}
+            >
+              Search
+            </button>
+          </div>
+        </header>
 
         {/* 🔁 Scene-based rendering */}
         {activeScene === 'upload' ? (
           <Upload />
-        ) : activeScene === 'create' ? ( 
+        ) : activeScene === 'create' ? (
           <Create />
+        ) : activeScene === 'result' ? (
+          <Result searchQuery={searchQuery} searchType={searchType} />
         ) : (
           <section className="dashboard">
             <div className="subscribed">
               <div
                 className="upload-box clickable-panel"
-                onClick={() => setActiveScene('create')} 
+                onClick={() => setActiveScene('create')}
               >
                 <img src={createImage} alt="create channel" />
                 <h3>Create Your Channel</h3>
@@ -197,7 +190,7 @@ function App() {
                 <div>
                   <strong>Felix</strong> has replied on<br />
                   <strong>At aliquam emin in cras arcu</strong>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labo...</p>
+                  <p>Lorem ipsum dolor sit amet...</p>
                 </div>
               </div>
               <div className="activity">
@@ -205,7 +198,7 @@ function App() {
                 <div>
                   <strong>Jonathon</strong> has commented on<br />
                   <strong>Venenatis aliquam sit pellentesque...</strong>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labo...</p>
+                  <p>Lorem ipsum dolor sit amet...</p>
                 </div>
               </div>
               <div className="activity">
