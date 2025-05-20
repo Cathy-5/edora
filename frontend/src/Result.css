@@ -63,7 +63,7 @@
   justify-content: space-between;
 }
 
-/* Buttons (Always Right-Aligned, Each on New Line) */
+/* Buttons: Wrapped with numbers inside */
 .result-buttons {
   display: flex;
   flex-direction: column;
@@ -73,14 +73,32 @@
 .like-btn,
 .dislike-btn,
 .comment-btn {
-  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
-  padding: 5px;
-  white-space: nowrap;
-  text-align: right;
   width: fit-content;
+}
+
+/* Button Colors */
+.like-btn {
+  background-color: #35353d; /* Blue */
+  color: white;
+}
+
+.dislike-btn {
+  background-color: #35353d; /* Red */
+  color: white;
+}
+
+.comment-btn {
+  background-color: #35353d; /* Blue */
+  color: white;
 }
 
 /* Comment preview */

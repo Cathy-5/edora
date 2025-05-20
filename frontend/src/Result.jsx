@@ -46,7 +46,7 @@ function Result({ searchQuery, searchType }) {
                 <span className={`result-tag ${result.className}`}>{result.tag}</span>
               </div>
               <div className="result-buttons">
-                <button className="like-btn">👍 {result.likes}</button>
+                <button className="like-btn">👍 <span>{result.likes}</span></button>
               </div>
 
               {/* Second Line: File Preview */}
@@ -54,7 +54,7 @@ function Result({ searchQuery, searchType }) {
                 <span>{result.filePreview}</span>
               </div>
               <div className="result-buttons">
-                <button className="dislike-btn">👎 {result.dislikes}</button>
+                <button className="dislike-btn">👎 <span>{result.dislikes}</span></button>
               </div>
 
               {/* Third Line: Channel Name & Comment Button */}
@@ -67,7 +67,7 @@ function Result({ searchQuery, searchType }) {
                   onMouseEnter={() => setHoveredComments(result.comments)}
                   onMouseLeave={() => setHoveredComments(null)}
                 >
-                  💬 {result.comments.length}
+                  💬 <span>{result.comments.length}</span>
                 </button>
                 {hoveredComments && (
                   <div className="comment-preview">
