@@ -426,6 +426,15 @@ body {
   cursor: pointer;
 }
 
+.channel-box {
+  border: 1px solid #eee; /* lighter, solid border */
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  background-color: #f9f9f9; /* subtle contrast */
+  transition: all 0.3s ease;
+}
+
 .upload-area {
   margin: 15px 0;
   color: #888;

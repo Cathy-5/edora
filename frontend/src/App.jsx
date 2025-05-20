@@ -10,7 +10,9 @@ import notificationImage from './assets/notification.png';
 import settingImage from './assets/setting.png'; 
 import supportImage from './assets/support.png'; 
 import coinsImage from './assets/coins.png'; 
+import createImage from './assets/create.png'; 
 import Upload from './Upload';
+import Create from './Create'; 
 
 function App() {
   const [activeScene, setActiveScene] = useState('home');
@@ -19,7 +21,6 @@ function App() {
   return (
     <div className="app">
       <aside className="sidebar">
-
         <img src={edoraImage} alt="edora" className="edora-logo" />
         <nav className="nav-links">
           <div
@@ -107,11 +108,11 @@ function App() {
             src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
             alt="User"
             className="avatar"
-            />
-            <div className="points-display">
-              <img src={coinsImage} alt="coins" className="coins-icon" />
-              <span>{points} points</span>
-            </div>
+          />
+          <div className="points-display">
+            <img src={coinsImage} alt="coins" className="coins-icon" />
+            <span>{points} points</span>
+          </div>
           <div className="username">Keenan</div>
         </div>
       </aside>
@@ -125,8 +126,21 @@ function App() {
         {/* 🔁 Scene-based rendering */}
         {activeScene === 'upload' ? (
           <Upload />
+        ) : activeScene === 'create' ? ( 
+          <Create />
         ) : (
           <section className="dashboard">
+            <div className="subscribed">
+              <div
+                className="upload-box clickable-panel"
+                onClick={() => setActiveScene('create')} 
+              >
+                <img src={createImage} alt="create channel" />
+                <h3>Create Your Channel</h3>
+                <p>Build your own community and start sharing content now!</p>
+              </div>
+            </div>
+
             <div
               className="upload-box clickable-panel"
               onClick={() => setActiveScene('upload')}
@@ -134,19 +148,6 @@ function App() {
               <img src={uploadImage} alt="upload" />
               <h3>Upload Your Documents</h3>
               <p>Start helping others by uploading your own documents here!</p>
-            </div>
-
-            <div className="saved-docs">
-              <h4>Your saved document</h4>
-              <ul className="no-bullets">
-                <li>Assignment 2 for 2DV608</li>
-                <li>Manual for JMT file</li>
-                <li>Help me with this assignment!!!</li>
-              </ul>
-            </div>
-
-            <div className="subscribed">
-              <h4>Subscribed Channel</h4>
             </div>
 
             <div className="recent-activity">
@@ -175,6 +176,15 @@ function App() {
                   <p>📅 25th Sep. ⏰ 11.00 am</p>
                 </div>
               </div>
+            </div>
+
+            <div className="saved-docs">
+              <h4>Your saved document</h4>
+              <ul className="no-bullets">
+                <li>Assignment 2 for 2DV608</li>
+                <li>Manual for JMT file</li>
+                <li>Help me with this assignment!!!</li>
+              </ul>
             </div>
           </section>
         )}
