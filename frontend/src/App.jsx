@@ -13,10 +13,18 @@ import coinsImage from './assets/coins.png';
 import createImage from './assets/create.png'; 
 import Upload from './Upload';
 import Create from './Create'; 
+import Result from './Result';  // import Result component
 
 function App() {
   const [activeScene, setActiveScene] = useState('home');
   const [points, setPoints] = useState(240); 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchType, setSearchType] = useState('file');
+
+  const handleSearch = () => {
+    console.log(`Searching for "${searchQuery}" in ${searchType}s`);
+    // You can later filter files or channels depending on `searchType`
+  };
 
   return (
     <div className="app">
@@ -117,11 +125,43 @@ function App() {
         </div>
       </aside>
 
-      <main className="main-content">
-        <header className="header">
-          <input className="search-bar" placeholder="Search your topic here..." />
-          <button className="filter-btn">🔍</button>
-        </header>
+        <main className="main-content">
+          <header className="header flex items-center gap-2">
+
+            {/* Softer round corners and light gray border */}
+            <div className="flex border border-gray-200 rounded-lg overflow-hidden flex-1 bg-white">
+
+              {/* Select dropdown */}
+              <select
+                className="appearance-none px-3 py-2 text-sm border-r border-gray-200 focus:outline-none bg-white"
+                value={searchType}
+                onChange={(e) => setSearchType(e.target.value)}
+              >
+                <option value="file">File</option>
+                <option value="channel">Channel</option>
+              </select>
+
+              {/* Search input */}
+              <input
+                type="text"
+                className="flex-grow px-4 py-2 focus:outline-none"
+                placeholder={`Search by ${searchType}...`}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+
+              {/* Search button integrated */}
+              <button
+                className="bg-purple-600 text-white px-4 py-2 hover:bg-purple-700 transition focus:outline-none"
+                onClick={() => handleSearch()}
+              >
+                Search
+              </button>
+
+            </div>
+
+          </header>
+
 
         {/* 🔁 Scene-based rendering */}
         {activeScene === 'upload' ? (
